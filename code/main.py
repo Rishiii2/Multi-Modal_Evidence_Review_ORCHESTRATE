@@ -9,7 +9,7 @@ from agent import process_claim
 
 logging.basicConfig(level=logging.INFO, filename='../log.txt', format='%(asctime)s - %(levelname)s - %(message)s')
 
-def main(csv_path="dataset/claims.csv", output_path="output.csv", max_workers=5):
+def main(csv_path="dataset/claims.csv", output_path="output.csv", max_workers=1):
     logging.info("Starting Multi-Modal Evidence Review Pipeline")
     
     # Load all datasets

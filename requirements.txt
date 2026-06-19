@@ -1,0 +1,8 @@
+pandas
+pydantic
+pillow
+google-genai
+python-dotenv
+tqdm
+tenacity
+opencv-python-headless

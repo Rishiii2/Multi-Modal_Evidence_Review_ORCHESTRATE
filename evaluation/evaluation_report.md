@@ -17,10 +17,10 @@ This system uses a **V5 Multi-Agent Orchestrator** to analyze multi-modal eviden
   - Output tokens per claim: ~400 tokens.
 
 - **Cost Estimation**:
-  - Assuming Gemini 2.5 Pro (or Claude 3.5 Sonnet fallback):
-  - At $3.00 / 1M Input Tokens and $15.00 / 1M Output Tokens.
-  - **Cost per Claim**: ~$0.015.
-  - **Full Dataset (100 rows)**: ~$1.50.
+  - Assuming Gemini 1.5 Pro:
+  - At $3.50 / 1M Input Tokens and $10.50 / 1M Output Tokens.
+  - **Cost per Claim**: ~$0.012.
+  - **Full Dataset (100 rows)**: ~$1.20.
 
 - **Latency**:
   - Vision calls run sequentially per claim, but claims run concurrently via `ThreadPoolExecutor` (max_workers=5).
