@@ -58,6 +58,22 @@ def main(csv_path="dataset/claims.csv", output_path="output.csv", max_workers=5)
                 results.append(output_row)
             except Exception as e:
                 logging.error(f"Failed to process claim for user {ctx['user_id']}: {e}")
+                results.append({
+                    "user_id": ctx["user_id"],
+                    "image_paths": ";".join(ctx["image_paths"]),
+                    "user_claim": ctx["user_claim"],
+                    "claim_object": ctx["claim_object"],
+                    "evidence_standard_met": False,
+                    "evidence_standard_met_reason": "Fatal script error",
+                    "risk_flags": "manual_review_required",
+                    "issue_type": "unknown",
+                    "object_part": "unknown",
+                    "claim_status": "not_enough_information",
+                    "claim_status_justification": f"System error: {str(e)[:100]}",
+                    "supporting_image_ids": "none",
+                    "valid_image": False,
+                    "severity": "unknown"
+                })
 
     # Build DataFrame
     out_df = pd.DataFrame(results)

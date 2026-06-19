@@ -97,3 +97,8 @@ class ClaimVerdict(BaseModel):
     supporting_image_ids: List[str] = Field(description="image IDs supporting the decision, use ['none'] if none")
     valid_image: bool = Field(description="true if the image set is usable for automated review")
     severity: Severity = Field(description="estimated damage severity")
+
+class CriticVerdict(BaseModel):
+    approved: bool = Field(description="True if the initial verdict is completely logically sound and contains no contradictions.")
+    critique_reasoning: str = Field(description="The critic's internal reasoning and logic checking.")
+    corrected_verdict: ClaimVerdict = Field(description="The corrected verdict if approved is False. If approved is True, return the original verdict.")
