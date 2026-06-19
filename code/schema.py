@@ -73,8 +73,20 @@ class RiskFlag(str, Enum):
     USER_HISTORY_RISK = "user_history_risk"
     MANUAL_REVIEW_REQUIRED = "manual_review_required"
 
-class AgentDecision(BaseModel):
-    internal_reasoning: str = Field(description="Visual description of the damage, lighting, object, and any discrepancies before making a decision.")
+class SingleImageAnalysis(BaseModel):
+    image_id: str = Field(description="The file name or ID of the evaluated image")
+    internal_reasoning: str = Field(description="Visual description of the damage, lighting, and object in THIS specific image.")
+    is_usable: bool = Field(description="True if the image is clear enough to evaluate.")
+    issue_visible: bool = Field(description="True if damage is visible in this image.")
+    issue_type: IssueType = Field(description="The visible issue type in this image.")
+    object_part: ObjectPart = Field(description="The relevant object part in this image.")
+    damage_description: str = Field(description="Brief description of the damage.")
+    quality_flags: List[RiskFlag] = Field(description="Any risk flags specific to this image (e.g. blurry_image, wrong_angle).")
+    confidence: float = Field(description="Confidence from 0.0 to 1.0.")
+    severity_estimate: Severity = Field(description="Estimated severity based ONLY on this image.")
+
+class ClaimVerdict(BaseModel):
+    internal_reasoning: str = Field(description="Final reasoning synthesis taking all single image analyses into account.")
     evidence_standard_met: bool = Field(description="true if the image set is sufficient to evaluate the claim")
     evidence_standard_met_reason: str = Field(description="short reason for the evidence decision")
     risk_flags: List[RiskFlag] = Field(description="risk flags found in the claim or history")
